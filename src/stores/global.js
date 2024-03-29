@@ -23,7 +23,7 @@ export const useGlobalStore = defineStore("global", () => {
 
   async function uploadImages(formData) {
     try {
-      const { data } = await axios.post("/upload", formData);
+      const { data } = await axios.post("/uploads", formData);
       return data.data;
     } catch (error) {
       alert(error);
