@@ -23,7 +23,7 @@
     "graphql-combine-query": "^1.2.4",
     "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
-    "md-editor-v3": "^4.0.0",
+    "md-editor-v3": "^4.12.2",
     "pinia": "^2.0.35",
     "sass": "^1.62.1",
     "simple-notify": "^0.5.5",
