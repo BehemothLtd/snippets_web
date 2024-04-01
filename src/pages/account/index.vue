@@ -21,7 +21,8 @@
 
     <CommonModal
       v-if="isShowDetailModal"
-      @closeModal="isShowDetailModal = false"
+      :open="isShowDetailModal"
+      @close="isShowDetailModal = false"
     >
       <SnippetsDetail
         :snippet.sync="selectedSnippet"

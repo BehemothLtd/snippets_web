@@ -67,16 +67,12 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     return result;
   }
 
-  async function onAddSnippetTag({ snippetId, tagId }) {
-    const input = { snippetId, tagId };
-
-    return SelfRepository.addSnippetTag({ input });
+  async function onAddSnippetTag({ id, tagId }) {
+    return SelfRepository.addSnippetTag({ id, tagId });
   }
 
   async function onDeleteSnippetTag({ snippetId, tagId }) {
-    const input = { snippetId, tagId };
-
-    return SelfRepository.removeSnippetTag({ input });
+    return SelfRepository.removeSnippetTag({ snippetId, tagId });
   }
 
   async function getPinnedSnippets() {

@@ -54,10 +54,8 @@ export const pinSnippetGQL = gql`
 `;
 
 export const addSnippetTagGQL = gql`
-  mutation ($input: SnippetTagInput!) {
-    TagCreate(input: $input) {
-      message
-    }
+  mutation SnippetAddTag($id: ID!, $tagId: ID!) {
+    SnippetAddTag(id: $id, tagId: $tagId)
   }
 `;
 
