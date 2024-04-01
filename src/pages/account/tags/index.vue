@@ -61,12 +61,6 @@
                   type="button"
                   class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                 >
-                  Bulk edit
-                </button>
-                <button
-                  type="button"
-                  class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
-                >
                   Delete all
                 </button>
               </div>
@@ -92,13 +86,13 @@
                     </th>
                     <th
                       scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                     >
                       Self own
                     </th>
                     <th
                       scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                     >
                       Number of Usage
                     </th>
@@ -162,10 +156,18 @@
                     >
                       <a
                         v-if="tag.self"
-                        class="text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                        class="text-indigo-600 hover:text-indigo-900 cursor-pointer mr-2"
                         @click="showEditTag(tag.id)"
                       >
                         Edit<span class="sr-only">, {{ tag.name }}</span>
+                      </a>
+
+                      <a
+                        v-if="tag.self"
+                        class="text-red-500 text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                        @click="onDeleteTag(tag)"
+                      >
+                        Delete<span class="sr-only">, {{ tag.name }}</span>
                       </a>
                     </td>
                   </tr>
@@ -179,7 +181,8 @@
       <BasicForm
         v-model:showModal="showModal"
         v-model:tag="tag"
-        @save="handleTag"
+        @edit="handleEditTag"
+        @create="handleCreateTag"
       ></BasicForm>
 
       <Pagination
@@ -203,6 +206,9 @@ import Pagination from "@/components/shared/Pagination.vue";
 import BasicForm from "@/components/tags/BasicForm.vue";
 
 // ============UTILITIES================
+import { SwalOptions, SwalIconOptions } from "@/helpers/swal";
+import useSwal from "@/composable/swal";
+const { confirming } = useSwal();
 
 // ==============STORE=============
 import { useTagsStore } from "@/stores/tags/index";
@@ -242,11 +248,8 @@ function searchTag() {
   fetchTagList();
 }
 
-async function handleTag($event) {
-  let response = null;
-  $event
-    ? (response = await tagStore.editTag($event))
-    : (response = await tagStore.onCreateTag({ name: tag.value.name }));
+async function handleCreateTag() {
+  const response = await tagStore.onCreateTag({ name: tag.value.name });
 
   if (response) {
     showModal.value = false;
@@ -254,11 +257,50 @@ async function handleTag($event) {
   }
 }
 
+async function handleEditTag(tag) {
+  if (!tag) return;
+
+  // const confirmed = await confirming(
+  //   new SwalOptions({
+  //     html:
+  //       "Do you want to update " +
+  //       `<b>${tag.name}</b> <br/> Used tags will be updated`,
+  //     icon: SwalIconOptions.Warning,
+  //   })
+  // );
+
+  // if (confirmed) {
+  const response = await tagStore.editTag(tag.id);
+
+  if (response) {
+    showModal.value = false;
+    onPageChange(1);
+  }
+  // }
+}
+
 async function showEditTag(id) {
   await tagStore.showTag(id);
 
   if (tag.value?.id) {
     showModal.value = true;
+  }
+}
+
+async function onDeleteTag(tag) {
+  const confirmed = await confirming(
+    new SwalOptions({
+      html:
+        "Do you want to delete " +
+        `<b>${tag.name}</b> <br/> Used tags will be removed`,
+      icon: SwalIconOptions.Error,
+    })
+  );
+
+  if (confirmed) {
+    await tagStore.deleteTag(tag.id);
+
+    onPageChange(1);
   }
 }
 

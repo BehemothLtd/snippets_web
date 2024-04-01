@@ -4,7 +4,7 @@ import gqlRequest from "@/apis/gqlClient";
 import { fetchTagsGQL, fetchTagGQL } from "@/apis/resolvers";
 
 // Mutations
-import { createTagGQL, editTagGQL } from "@/apis/mutations";
+import { createTagGQL, editTagGQL, deleteTagGQL } from "@/apis/mutations";
 
 export default {
   // ==================QUERY======================
@@ -24,5 +24,9 @@ export default {
 
   edit(payload, options = { loading: true, toast: true }) {
     return gqlRequest(editTagGQL, payload, options);
+  },
+
+  delete(payload, options = { loading: true, toast: true }) {
+    return gqlRequest(deleteTagGQL, payload, options);
   },
 };

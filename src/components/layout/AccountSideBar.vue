@@ -67,6 +67,7 @@ import SvgLike from "@/components/svg/SvgLike.vue";
 import SvgPinned from "@/components/svg/SvgPinned.vue";
 import SvgCollection from "@/components/svg/SvgCollection.vue";
 import SvgArrowDown from "@/components/svg/SvgArrowDown.vue";
+import SvgTag from "@/components/svg/SvgTag.vue";
 // import SvgSetting from "@/components/svg/SvgSetting.vue";
 
 // ==============STORE=============
@@ -77,6 +78,7 @@ export default defineComponent({
   setup() {
     const menus = [
       { icon: SvgDashboard, text: "My Page", url: "/account", current: true },
+      { icon: SvgTag, text: "Tags", url: "/account/tags" },
       { icon: SvgLike, text: "Liked", url: "/account/snippets/favorited" },
       { icon: SvgPinned, text: "Pinned", url: "/account/snippets/pinned" },
       // {icon: "Dashboard", text: "Setting", url: "/account/setting"},

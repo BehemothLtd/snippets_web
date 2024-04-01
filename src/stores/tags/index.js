@@ -24,6 +24,15 @@ export const useTagsStore = defineStore("tags", () => {
   });
 
   // -----------ACTIONS--------------
+  async function showTag(id) {
+    const response = await TagsRepository.show({ tagId: id });
+
+    if (response) {
+      Object.assign(tag, response?.Tag);
+      return response?.Tag;
+    }
+  }
+
   async function fetchTags() {
     const response = await TagsRepository.list(tagInput.value);
 
@@ -51,13 +60,8 @@ export const useTagsStore = defineStore("tags", () => {
     }
   }
 
-  async function showTag(id) {
-    const response = await TagsRepository.show({ tagId: id });
-
-    if (response) {
-      Object.assign(tag, response?.Tag);
-      return response?.Tag;
-    }
+  function deleteTag(id) {
+    TagsRepository.delete({ id });
   }
 
   function setQuery(params) {
@@ -70,10 +74,11 @@ export const useTagsStore = defineStore("tags", () => {
     tagMetadata,
     tagInput,
 
+    showTag,
     fetchTags,
     onCreateTag,
-    showTag,
     editTag,
+    deleteTag,
     setQuery,
   };
 });

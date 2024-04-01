@@ -24,7 +24,7 @@
 
         <button
           type="button"
-          class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="btn-save rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           @click="submitForm(tagFormRef)"
         >
           {{ tag.id ? "Save" : "Create" }}
@@ -44,7 +44,7 @@ const tagFormRef = ref(null);
 
 const showModal = defineModel("showModal");
 
-const emits = defineEmits(["save"]);
+const emits = defineEmits(["edit", "create"]);
 
 function closeModal(form) {
   if (!form) return;
@@ -57,7 +57,7 @@ function submitForm(form) {
   if (!form) return;
   form.validate((valid) => {
     if (valid) {
-      emits("save", tag.value?.id);
+      tag.value.id ? emits("edit", tag.value) : emits("create");
     } else {
       return false;
     }

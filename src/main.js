@@ -17,6 +17,9 @@ import "./style.css";
 // =================SHARED COMPONENT=============
 import FormValidator from "@/components/shared/FormValidator.vue";
 
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 const pinia = createPinia();
 
 const app = createApp({
@@ -29,5 +32,7 @@ app.use(pinia);
 app.provide("api", axios);
 
 app.component("FormValidator", FormValidator);
+
+app.provide("Swal", Swal);
 
 app.mount("#app");
