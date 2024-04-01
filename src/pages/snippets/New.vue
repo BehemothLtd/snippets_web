@@ -3,7 +3,9 @@
     <form @submit.prevent="onCreateSnippet">
       <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
-          <div class="mt-24 md:mt-16 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div
+            class="mt-24 md:mt-16 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+          >
             <div class="col-span-full">
               <form-validator label="Title" required name="title">
                 <input
@@ -158,8 +160,8 @@ export default defineComponent({
       // TODO
       const result = await snippetStore.createSnippet(form);
 
-      if (result.msSnippetCreate?.snippet) {
-        router.push(`/snippets/${result.msSnippetCreate.snippet.id}/edit`);
+      if (result.SnippetCreate?.snippet) {
+        router.push(`/snippets/${result.SnippetCreate?.snippet.id}/edit`);
       }
     }
 

@@ -2,11 +2,19 @@ import gql from "graphql-tag";
 
 export const createSnippetGQL = gql`
   mutation ($input: SnippetInput!) {
-    msSnippetCreate(input: $input) {
+    SnippetCreate(input: $input) {
       snippet {
         id
         title
         content
+        userId
+        slug
+        snippetType
+        favoritesCount
+        favorited
+        pinned
+        createdAt
+        updatedAt
       }
     }
   }
@@ -26,10 +34,8 @@ export const updateSnippetGQL = gql`
 `;
 
 export const deleteSnippetGQL = gql`
-  mutation ($id: ID!) {
-    msSnippetDelete(id: $id) {
-      message
-    }
+  mutation SnippetDelete($id: ID!) {
+    SnippetDelete(id: $id)
   }
 `;
 
@@ -49,7 +55,7 @@ export const pinSnippetGQL = gql`
 
 export const addSnippetTagGQL = gql`
   mutation ($input: SnippetTagInput!) {
-    snippetTagCreate(input: $input) {
+    TagCreate(input: $input) {
       message
     }
   }

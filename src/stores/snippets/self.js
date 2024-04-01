@@ -41,8 +41,8 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
 
   async function getMySnippets() {
     const result = await SelfRepository.showMySnippets(query.value);
-    mySnippets.value = result?.selfSnippets?.collection;
-    metadata.value = result?.selfSnippets?.metadata;
+    mySnippets.value = result.SelfSnippets?.collection;
+    metadata.value = result.SelfSnippets?.metadata;
   }
 
   async function deleteMySnippet(id) {

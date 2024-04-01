@@ -24,18 +24,18 @@ export const useCollectionsStore = defineStore("collections", () => {
   }
 
   async function fetchCollections() {
-    if (query.value.page > maxPage) return;
+    // if (query.value.page > maxPage) return;
 
     const result = await CollectionsRepository.list(query.value);
 
-    collections.value = [
-      ...collections.value,
-      ...result.selfCollections.collection,
-    ];
+    // collections.value = [
+    //   ...collections.value,
+    //   ...result.selfCollections.collection,
+    // ];
 
-    metadata.value = result.selfCollections.metadata;
+    // metadata.value = result.selfCollections.metadata;
 
-    maxPage.value = result.selfCollections.metadata.pages;
+    // maxPage.value = result.selfCollections.metadata.pages;
   }
 
   async function getCollection(id) {
