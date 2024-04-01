@@ -1,20 +1,32 @@
 import gqlRequest from "@/apis/gqlClient";
 
 // Queries
-import { fetchTagGQL } from "@/apis/resolvers";
+import { fetchTagsGQL, fetchTagGQL } from "@/apis/resolvers";
 
 // Mutations
-import { createTagGQL } from "@/apis/mutations";
+import { createTagGQL, editTagGQL, deleteTagGQL } from "@/apis/mutations";
 
 export default {
   // ==================QUERY======================
 
-  list(_, options = { loading: false, toast: false }) {
-    return gqlRequest(fetchTagGQL, null, options);
+  list(payload, options = { loading: true, toast: false }) {
+    return gqlRequest(fetchTagsGQL, payload, options);
+  },
+
+  show(payload, options = { loading: true, toast: false }) {
+    return gqlRequest(fetchTagGQL, payload, options);
   },
 
   // ==================MUTATION======================
-  create(input, options = { loading: false, toast: false }) {
+  create(input, options = { loading: true, toast: true }) {
     return gqlRequest(createTagGQL, { input }, options);
+  },
+
+  edit(payload, options = { loading: true, toast: true }) {
+    return gqlRequest(editTagGQL, payload, options);
+  },
+
+  delete(payload, options = { loading: true, toast: true }) {
+    return gqlRequest(deleteTagGQL, payload, options);
   },
 };

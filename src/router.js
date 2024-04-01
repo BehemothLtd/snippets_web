@@ -9,8 +9,8 @@ import CreditLayout from "@/layouts/CreditLayout.vue";
 
 // =============== AUTH ==============
 import SignIn from "@/pages/auths/SignIn.vue";
-import ForgotPassword from "@/pages/auths/ForgotPassword.vue"
-import ResetPassword from "@/pages/auths/ResetPassword.vue"
+import ForgotPassword from "@/pages/auths/ForgotPassword.vue";
+import ResetPassword from "@/pages/auths/ResetPassword.vue";
 
 // =============== PUBLIC ==============
 import Snippets from "@/pages/snippets/Index.vue";
@@ -25,6 +25,7 @@ import Account from "@/pages/account/index.vue";
 import PinnedSnippets from "@/pages/account/snippets/pinned.vue";
 import FavoritedSnippets from "@/pages/account/snippets/favorited.vue";
 import Collections from "@/pages/account/collections.vue";
+import Tags from "@/pages/account/tags/index.vue";
 
 import CreditPage from "@/pages/credit/Index.vue";
 
@@ -97,6 +98,13 @@ const router = createRouter({
     {
       path: "/account",
       component: Account,
+      meta: {
+        layout: MyPage,
+      },
+    },
+    {
+      path: "/account/tags",
+      component: Tags,
       meta: {
         layout: MyPage,
       },

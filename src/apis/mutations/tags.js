@@ -1,20 +1,32 @@
 import gql from "graphql-tag";
 
 export const createTagGQL = gql`
-mutation ($input: TagInput!) {
-  tagCreate(input: $input) {
-    tag {
-      id
-      name
+  mutation ($input: TagInput!) {
+    TagCreate(input: $input) {
+      tag {
+        id
+        name
+      }
     }
   }
-}
 `;
 
-export const deleteTagGQL =gql`
-mutation ($id: ID!) {
-  tagDelete(id: $id) {
-    message
+export const editTagGQL = gql`
+  mutation ($id: ID!, $input: TagInput!) {
+    TagUpdate(id: $id, input: $input) {
+      tag {
+        id
+        name
+        lockVersion
+        self
+        numberOfUsage
+      }
+    }
   }
-}
-`
+`;
+
+export const deleteTagGQL = gql`
+  mutation ($id: ID!) {
+    TagDelete(id: $id)
+  }
+`;
