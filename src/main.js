@@ -14,6 +14,9 @@ import App from "./App.vue";
 import "aos/dist/aos.css";
 import "./style.css";
 
+// =================SHARED COMPONENT=============
+import FormValidator from "@/components/shared/FormValidator.vue";
+
 const pinia = createPinia();
 
 const app = createApp({
@@ -24,5 +27,7 @@ app.use(ElementPlus);
 app.use(router);
 app.use(pinia);
 app.provide("api", axios);
+
+app.component("FormValidator", FormValidator);
 
 app.mount("#app");

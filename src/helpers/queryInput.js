@@ -1,5 +1,7 @@
 import { get } from "lodash";
 
+// -----------------SNIPPETS-----------------
+
 export class SnippetsQuery {
   constructor(args) {
     this.titleCont = get(args, "titleCont", "");
