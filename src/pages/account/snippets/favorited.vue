@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:px-48">
+  <div class="2xl:px-48 xl:px-28">
     <img
       class="w-100 mb-[100px] m-auto"
       src="@/assets/images/banner_profile_like.png"

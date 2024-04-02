@@ -121,7 +121,7 @@ const props = defineProps({
     default: false,
   },
   snippetId: {
-    type: Number,
+    type: [Number, String],
     default: null,
   },
 });

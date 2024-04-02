@@ -99,21 +99,38 @@
   </div>
 </template>
 
-<script>
-import { computed } from "vue";
+<script setup>
+import { watch, ref } from "vue";
+import { storeToRefs } from "pinia";
 import { useGlobalStore } from "@/stores/global";
+const globalStore = useGlobalStore();
+const { requests } = storeToRefs(globalStore);
 
-export default {
-  setup() {
-    const globalStore = useGlobalStore();
+const loading = ref(false);
 
-    const loading = computed(() => globalStore.loading);
-
-    return {
-      loading,
-    };
+watch(
+  requests,
+  () => {
+    if (requests.value.length > 0) {
+      begin();
+    } else {
+      stop();
+    }
   },
-};
+  {
+    deep: true,
+  }
+);
+
+function begin() {
+  loading.value = true;
+}
+
+function stop() {
+  setTimeout(() => {
+    loading.value = false;
+  }, 500);
+}
 </script>
 
 <style scoped>

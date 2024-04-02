@@ -34,6 +34,12 @@ api.interceptors.request.use(
       config.headers["BhmAIO-Authorization"] = `Bearer ${token.value}`;
     }
 
+    if (!config.hideLoading) {
+      config.id =
+        new Date().getTime() + Math.random().toString(36).substring(2, 15);
+      globalStore.addRequest(config.id);
+    }
+
     return config;
   },
   function (error) {
@@ -51,7 +57,9 @@ api.interceptors.response.use(
     const authStore = useAuthStore();
     const { token } = storeToRefs(authStore);
 
-    hideLoading();
+    const globalStore = useGlobalStore();
+
+    globalStore.removeRequest(response.config.id);
 
     // Do something with response data
     const errors = response.data.errors;
@@ -99,7 +107,8 @@ api.interceptors.response.use(
     }
   },
   function (error) {
-    hideLoading();
+    const id = get(error, "response.config.id");
+    globalStore.removeRequest(id);
 
     const errCode = get(error, "response.status");
 
@@ -129,15 +138,31 @@ export default function (
     toast: true,
   }
 ) {
-  const globalStore = useGlobalStore();
-  globalStore.loading = options.loading;
+  const requestType = get(options, "requestType");
 
-  return api.post(
-    BASE_URL,
-    {
-      query: print(query),
-      variables: variables,
-    },
-    options
-  );
+  switch (requestType) {
+    case "upload":
+      const config = {
+        header: {
+          "Content-Type": "multiple/form-data",
+        },
+        baseURL: import.meta.env.VITE_APP_API_BASE_URL,
+        timeout: 300000,
+      };
+
+      return api.post("/uploads", variables.data, {
+        ...config,
+        ...options,
+      });
+
+    default:
+      return api.post(
+        BASE_URL,
+        {
+          query: print(query),
+          variables: variables,
+        },
+        options
+      );
+  }
 }
