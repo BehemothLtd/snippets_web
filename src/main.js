@@ -1,7 +1,5 @@
 import { createApp, h } from "vue";
 
-import axios from "@/apis/axios";
-
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -29,7 +27,6 @@ const app = createApp({
 app.use(ElementPlus);
 app.use(router);
 app.use(pinia);
-app.provide("api", axios);
 
 app.component("FormValidator", FormValidator);
 

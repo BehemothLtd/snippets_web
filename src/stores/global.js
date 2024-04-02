@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { get } from "lodash";
 
-import axios from "@/apis/axios";
 import gqlRequest from "@/apis/gqlClient";
 
 export const useGlobalStore = defineStore("global", () => {
