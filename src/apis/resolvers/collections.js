@@ -2,17 +2,14 @@ import gql from "graphql-tag";
 
 export const getCollectionListGQL = gql`
   query ($input: PagyInput!) {
-    selfCollections(input: $input) {
+    Collections(input: $input) {
       collection {
         id
-        count
         title
-        snippets {
-          id
-          title
-        }
+        userId
+        createdAt
+        updatedAt
       }
-      metadata
     }
   }
 `;

@@ -41,8 +41,8 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
 
   async function getMySnippets() {
     const result = await SelfRepository.showMySnippets(query.value);
-    mySnippets.value = result?.selfSnippets?.collection;
-    metadata.value = result?.selfSnippets?.metadata;
+    mySnippets.value = result.SelfSnippets?.collection;
+    metadata.value = result.SelfSnippets?.metadata;
   }
 
   async function deleteMySnippet(id) {
@@ -67,16 +67,12 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     return result;
   }
 
-  async function onAddSnippetTag({ snippetId, tagId }) {
-    const input = { snippetId, tagId };
-
-    return SelfRepository.addSnippetTag({ input });
+  async function onAddSnippetTag({ id, tagId }) {
+    return SelfRepository.addSnippetTag({ id, tagId });
   }
 
   async function onDeleteSnippetTag({ snippetId, tagId }) {
-    const input = { snippetId, tagId };
-
-    return SelfRepository.removeSnippetTag({ input });
+    return SelfRepository.removeSnippetTag({ snippetId, tagId });
   }
 
   async function getPinnedSnippets() {

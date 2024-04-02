@@ -315,14 +315,16 @@ export default defineComponent({
       router.push("/account");
     }
 
-    const onAddTagForSnippet = debounce((tagId) => {
-      const snippetId = Number(route.params.id);
-      selfSnippetStore.onAddSnippetTag({ snippetId, tagId });
+    const onAddTagForSnippet = debounce((value) => {
+      const tagId = String(value);
+      const id = String(route.params.id);
+      selfSnippetStore.onAddSnippetTag({ id, tagId });
     }, 300);
 
-    async function onRemoveTagOfSnippet(tagId) {
-      const snippetId = Number(route.params.id);
-      await selfSnippetStore.onDeleteSnippetTag({ snippetId, tagId });
+    async function onRemoveTagOfSnippet(value) {
+      const id = String(value);
+      const tagId = String(route.params.id);
+      await selfSnippetStore.onDeleteSnippetTag({ id, tagId });
       nextTick();
     }
 

@@ -21,7 +21,8 @@
 
     <CommonModal
       v-if="isShowDetailModal"
-      @closeModal="isShowDetailModal = false"
+      :open="isShowDetailModal"
+      @close="isShowDetailModal = false"
     >
       <SnippetsDetail
         :snippet.sync="selectedSnippet"
@@ -124,7 +125,7 @@ export default defineComponent({
     }
 
     async function deleteSnippet(id) {
-      await selfSnippetStore.deleteMySnippet(Number(id));
+      await selfSnippetStore.deleteMySnippet(String(id));
       fetchMySnippets();
     }
 

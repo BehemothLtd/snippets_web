@@ -62,7 +62,7 @@ export const requestHomePageGQL = combineQuery("HomePageQuery")
 
 export const getMySnippetGQL = gql`
   query ($id: ID!) {
-    selfSnippet(id: $id) {
+    SelfSnippet(id: $id) {
       id
       title
       slug
@@ -79,20 +79,22 @@ export const getMySnippetGQL = gql`
 `;
 
 export const getMySnippetsGQL = gql`
+  ${METADATA_FIELDS}
   query ($input: PagyInput!) {
-    selfSnippets(input: $input) {
+    SelfSnippets(input: $input) {
       collection {
         id
         title
         slug
         snippetType
-        previewContent
-        tags {
-          id
-          name
-        }
+        content
+        favoritesCount
+        favorited
+        pinned
       }
-      metadata
+      metadata {
+        ...MetadataFragment
+      }
     }
   }
 `;
