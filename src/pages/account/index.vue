@@ -125,7 +125,7 @@ export default defineComponent({
     }
 
     async function deleteSnippet(id) {
-      await selfSnippetStore.deleteMySnippet(String(id));
+      await snippetStore.deleteSnippet(id);
       fetchMySnippets();
     }
 

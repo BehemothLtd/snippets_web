@@ -22,7 +22,7 @@ export const createSnippetGQL = gql`
 
 export const updateSnippetGQL = gql`
   mutation ($id: ID!, $input: SnippetInput!) {
-    msSnippetUpdate(id: $id, input: $input) {
+    SnippetUpdate(id: $id, input: $input) {
       snippet {
         id
         title

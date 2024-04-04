@@ -77,13 +77,7 @@ api.interceptors.response.use(
           token.value = null;
           router.push("/signIn");
           break;
-        case 422:
-          errorMessage = get(
-            errors[0],
-            "extensions.errors.base[0]",
-            "An error occurred"
-          );
-
+      
         default:
           break;
       }

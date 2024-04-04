@@ -24,8 +24,8 @@ export default {
     return gqlRequest(getMySnippetGQL, id, options);
   },
 
-  decrypt(id, privateKey) {
-    return gqlRequest(decryptSnippetGQL, id, privateKey);
+  decrypt(id, passkey) {
+    return gqlRequest(decryptSnippetGQL, id, passkey);
   },
 
   getPinnedSnippets(input, options = { loading: true, toast: false }) {

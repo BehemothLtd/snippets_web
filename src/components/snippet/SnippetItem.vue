@@ -12,14 +12,14 @@
         </h3>
 
         <MdPreview
+          v-if="snippet.snippetType == 'public'"
           class="text-sm bg-gray-100 hover:bg-gray-200 cursor-pointer"
           language="en-US"
-          :modelValue="snippet.previewContent"
+          :modelValue="snippet.content"
           @click="$emit('show')"
-          v-if="snippet.snippetType == 'public'"
         />
 
-        <div v-else @click="$emit('show')">{{ snippet.previewContent }}</div>
+        <div v-else @click="$emit('show')">***************</div>
 
         <div ref="tagsEl" class="tags-wrapper">
           <ul
@@ -61,7 +61,7 @@
 
           <div class="actions-edit flex items-center">
             <router-link
-              :to="`/snippets/${snippet.id}/edit`"
+              :to="`/snippets/${snippet.slug}/edit`"
               class="cursor-pointer me-3"
             >
               <SvgPencil></SvgPencil>
