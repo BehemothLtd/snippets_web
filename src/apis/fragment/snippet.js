@@ -10,5 +10,9 @@ fragment PublicSnippetFragment on Snippet {
   snippetType
   favoritesCount
   favorited
+  tags {
+    id
+    name
+  }
 }
 `;

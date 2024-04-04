@@ -5,6 +5,7 @@ import {
   getSnippetsListGQL,
   getSnippetGQL,
   requestHomePageGQL,
+  requestSnippetEditGql,
 } from "@/apis/resolvers/snippets";
 
 // Mutations
@@ -29,6 +30,10 @@ export default {
 
   detail(slug, options = { loading: true, toast: false }) {
     return gqlRequest(getSnippetGQL, { slug }, options);
+  },
+
+  mySnippet(slug, options = { loading: true, toast: false }) {
+    return gqlRequest(requestSnippetEditGql, { slug }, options);
   },
 
   // ==================MUTATION======================

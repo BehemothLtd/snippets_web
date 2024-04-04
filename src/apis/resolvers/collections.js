@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
 
+import { METADATA_FIELDS } from "@/apis/fragment/shared";
+
 export const getCollectionListGQL = gql`
+  ${METADATA_FIELDS}
   query ($input: PagyInput!) {
     Collections(input: $input) {
       collection {
@@ -10,27 +13,28 @@ export const getCollectionListGQL = gql`
         createdAt
         updatedAt
       }
+      metadata {
+        ...MetadataFragment
+      }
     }
   }
 `;
 
 export const getCollectionGQL = gql`
   query ($id: ID!) {
-    selfCollection(id: $id) {
+    Collection(id: $id) {
       id
       title
-      count
+      # count
       snippets {
         id
-        author
+        # author
         content
         title
-        decryptedContent
-        previewContent
         snippetType
-        tags {
-          name
-        }
+        # tags {
+        #   name
+        # }
       }
     }
   }

@@ -36,3 +36,12 @@ export const fetchTagsGQL = gql`
     }
   }
 `;
+
+export const fetchAllTagsGQL = gql`
+  query {
+    TagsAll {
+      id
+      name
+    }
+  }
+`;

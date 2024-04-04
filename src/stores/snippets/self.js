@@ -81,8 +81,8 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     return SelfRepository.addSnippetTag({ id, tagId });
   }
 
-  async function onDeleteSnippetTag({ snippetId, tagId }) {
-    return SelfRepository.removeSnippetTag({ snippetId, tagId });
+  async function onDeleteSnippetTag({ id, tagId }) {
+    return SelfRepository.removeSnippetTag({ id, tagId });
   }
 
   async function getPinnedSnippets() {

@@ -60,10 +60,8 @@ export const addSnippetTagGQL = gql`
 `;
 
 export const deleteSnippetTagGQL = gql`
-  mutation ($input: SnippetTagInput!) {
-    snippetTagDelete(input: $input) {
-      message
-    }
+  mutation ($id: ID!, $tagId: ID!) {
+    SnippetRemoveTag(id: $id, tagId: $tagId)
   }
 `;
 

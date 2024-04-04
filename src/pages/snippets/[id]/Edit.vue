@@ -60,7 +60,7 @@ watch(
 
 onMounted(() => {
   if (snippetSlug.value) {
-    snippetStore.getSnippetDetail(snippetSlug.value);
+    snippetStore.getMySnippet(snippetSlug.value);
   }
 });
 
