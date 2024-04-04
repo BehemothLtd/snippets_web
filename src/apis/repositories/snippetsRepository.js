@@ -44,8 +44,8 @@ export default {
     return gqlRequest(pinSnippetGQL, { id }, options);
   },
 
-  update(input) {
-    return gqlRequest(updateSnippetGQL, input);
+  update(id, input) {
+    return gqlRequest(updateSnippetGQL, { id, input });
   },
 
   delete(id) {

@@ -45,7 +45,7 @@
             <div v-if="!isPublic" class="col-span-3">
               <form-validator label="Private Key" required name="private_key">
                 <input
-                  v-model="form.privateKey"
+                  v-model="form.passkey"
                   type="text"
                   name="private_key"
                   id="private_key"
@@ -147,7 +147,7 @@ export default defineComponent({
     const form = reactive({
       title: "",
       content: "",
-      privateKey: null,
+      passkey: null,
       snippetType: "private",
     });
 
@@ -161,7 +161,7 @@ export default defineComponent({
       const result = await snippetStore.createSnippet(form);
 
       if (result.SnippetCreate?.snippet) {
-        router.push(`/snippets/${result.SnippetCreate?.snippet.id}/edit`);
+        router.push(`/snippets/${result.SnippetCreate?.snippet.slug}/edit`);
       }
     }
 

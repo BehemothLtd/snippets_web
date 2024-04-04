@@ -27,7 +27,7 @@
             ></tag-form>
           </div>
 
-          <div v-if="!isEdit" class="col-span-full">
+          <div v-if="isDecrypted" class="col-span-full">
             <form-validator>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input
@@ -54,7 +54,6 @@
                   Your content is being encrypted! Click to decrypt content!
                 </p>
                 <button
-                  v-if="!isDecrypted"
                   type="button"
                   class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   @click="openPrivateKeyModal('decrypt')"
@@ -66,7 +65,7 @@
               <MdEditor
                 v-if="isPublic || isDecrypted"
                 language="en-US"
-                v-model="editorValue"
+                v-model="form.content"
                 :toolbars="toolbars"
                 @onUploadImg="onUploadImg"
               >
@@ -142,6 +141,7 @@ import { SnippetTypeOptions } from "@/helpers/constant.js";
 import { useSnippetsStore } from "@/stores/snippets";
 import { useSelfSnippetsStore } from "@/stores/snippets/self";
 import { useGlobalStore } from "@/stores/global";
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   props: {
@@ -157,6 +157,10 @@ export default defineComponent({
     updated: {
       type: Boolean,
       default: false,
+    },
+    id: {
+      type: [String, Number],
+      default: null,
     },
   },
 
@@ -226,9 +230,7 @@ export default defineComponent({
       () => props.form.snippetType == SnippetTypeOptions.PUBLIC
     );
 
-    const isDecrypted = computed(
-      () => !isPublic.value && mySnippet.value.decryptedContent
-    );
+    const isDecrypted = computed(() => !isPublic && props.form.isDecrypted);
 
     const isShowButtonUpdate = computed(
       () => isPublic.value || isDecrypted.value
@@ -269,7 +271,7 @@ export default defineComponent({
 
     function handleUpdatePrivateSnippet($event) {
       // update private key before submit
-      props.form.privateKey = $event;
+      props.form.passkey = $event;
 
       emit("submit");
     }
@@ -307,18 +309,17 @@ export default defineComponent({
     }
 
     async function deleteSnippet() {
-      await snippetStore.deleteSnippet(Number(route.params.id));
+      const res = await snippetStore.deleteSnippet(props.form.id);
 
-      // TODO
-      selfSnippetStore.resetQuery();
-      selfSnippetStore.getMySnippets();
-      router.push("/account");
+      if (res) {
+        router.push("/account");
+      }
     }
 
     const onAddTagForSnippet = debounce((value) => {
       const tagId = String(value);
-      const id = String(route.params.id);
-      selfSnippetStore.onAddSnippetTag({ id, tagId });
+
+      selfSnippetStore.onAddSnippetTag({ id: props.id, tagId });
     }, 300);
 
     async function onRemoveTagOfSnippet(value) {

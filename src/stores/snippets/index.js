@@ -3,6 +3,7 @@ import { ref, computed, reactive } from "vue";
 import { omit, cloneDeep } from "lodash";
 
 import { PagyInput, SnippetsQuery } from "@/helpers/queryInput.js";
+import { SnippetFormInput } from "@/helpers/input/snippets.js";
 import { useAuthStore } from "@/stores/auth";
 
 import SnippetsRepository from "@/apis/repositories/snippetsRepository";
@@ -47,12 +48,12 @@ export const useSnippetsStore = defineStore("snippets", () => {
   async function deleteSnippet(id) {
     const result = await SnippetsRepository.delete(id);
 
-    return result;
+    return !!result;
   }
 
   async function createSnippet(payload) {
     const params =
-      payload.snippetType == "public" ? omit(payload, ["privateKey"]) : payload;
+      payload.snippetType == "public" ? omit(payload, ["passkey"]) : payload;
 
     const result = await SnippetsRepository.create(params);
 
@@ -76,25 +77,10 @@ export const useSnippetsStore = defineStore("snippets", () => {
     return result;
   }
 
-  async function updateSnippet(payload) {
-    const newContent = payload.decryptedContent
-      ? cloneDeep(payload.decryptedContent)
-      : payload.content;
+  async function updateSnippet(id, payload) {
+    const input = new SnippetFormInput(payload);
 
-    const input = { ...payload, content: newContent };
-
-    const params = {
-      id: payload.id,
-      input: omit(input, [
-        "id",
-        "snippetsTags",
-        "decryptedContent",
-        "slug",
-        "__typename",
-      ]),
-    }; // ==> input: {title, content, privateKey, snippetType}
-
-    const result = await SnippetsRepository.update(params);
+    const result = await SnippetsRepository.update(id, input);
     return result;
   }
 

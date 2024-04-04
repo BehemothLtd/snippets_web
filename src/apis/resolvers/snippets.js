@@ -120,20 +120,8 @@ export const getPinnedSnippetsGQL = gql`
 `;
 
 export const decryptSnippetGQL = gql`
-  query ($id: ID!, $privateKey: String!) {
-    selfSnippetDecrypt(id: $id, privateKey: $privateKey) {
-      id
-      title
-      slug
-      content
-      decryptedContent
-      snippetType
-      snippetsTags {
-        id
-        tagId
-        tagName
-      }
-    }
+  query ($id: ID!, $passkey: String!) {
+    SnippetDecryptContent(id: $id, passkey: $passkey)
   }
 `;
 

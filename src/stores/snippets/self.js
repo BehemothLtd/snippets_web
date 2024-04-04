@@ -1,7 +1,10 @@
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 import { ref, computed } from "vue";
+import { set } from "lodash";
 
 import SelfRepository from "@/apis/repositories/selfRepository";
+
+import { useSnippetsStore } from "@/stores/snippets/index";
 
 export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
   // Data
@@ -18,6 +21,9 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     perPage: 10,
     q: {},
   });
+
+  const snippetStore = useSnippetsStore();
+  const { snippetDetail } = storeToRefs(snippetStore);
 
   const currentPage = computed(() => query.value.page);
 
@@ -60,11 +66,15 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     return result;
   }
 
-  async function decryptSnippet(id, privateKey) {
-    const result = await SelfRepository.decrypt({ id, privateKey });
+  async function decryptSnippet(id, passkey) {
+    const result = await SelfRepository.decrypt({ id, passkey });
 
-    mySnippet.value = result.selfSnippetDecrypt;
-    return result;
+    set(snippetDetail.value, "isDecrypted", true);
+    set(snippetDetail.value, "content", result.SnippetDecryptContent);
+
+    console.log("dsa", snippetDetail.value);
+
+    return snippetDetail.value;
   }
 
   async function onAddSnippetTag({ id, tagId }) {
