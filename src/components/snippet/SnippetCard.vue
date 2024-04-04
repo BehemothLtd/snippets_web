@@ -40,8 +40,8 @@
 
         <CollectionModal
           :open="showCollectionModal"
-          @close="showCollectionModal = false"
           :snippetId="item.id"
+          @close="showCollectionModal = false"
         ></CollectionModal>
       </div>
 

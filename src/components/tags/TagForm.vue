@@ -22,6 +22,7 @@ import { ElButton } from "element-plus";
 
 // =============STORE==============
 import { useTagsStore } from "@/stores/tags";
+import { storeToRefs } from "pinia";
 
 export default {
   components: {
@@ -38,18 +39,19 @@ export default {
   setup(props, { emit }) {
     // ============REACTIVE============
 
+    // ============STORE============
+    const tagStore = useTagsStore();
+    const { tags } = storeToRefs(tagStore);
+
     // ============COMPUTED============
     const listTagOption = computed(() =>
-      tagStore.tags.map((item) => {
+      tags.value.map((item) => {
         return {
           value: Number(item.id),
           label: item.name,
         };
       })
     );
-
-    // ============STORE============
-    const tagStore = useTagsStore();
 
     // ============METHODS===========
     function handleAddRemoveTag($event) {
@@ -77,8 +79,6 @@ export default {
         handleAddRemoveTag($event);
       }
     }
-
-    onMounted(() => tagStore.fetchTags());
 
     return {
       listTagOption,

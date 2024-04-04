@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xl:px-48">
     <div
       id="snippet-list"
       class="grid-container gap-0"

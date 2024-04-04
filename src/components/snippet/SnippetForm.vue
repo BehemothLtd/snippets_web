@@ -218,11 +218,9 @@ export default defineComponent({
     const privateKeyAction = ref("edit");
 
     // ============COMPUTED============
-    const mySnippet = computed(() => selfSnippetStore.mySnippet);
-
     const listSnippetTag = computed(() => {
-      return mySnippet.value.snippetsTags?.map((item) => {
-        return Number(item.tagId);
+      return props.form.tags?.map((item) => {
+        return Number(item.id);
       });
     });
 
@@ -322,11 +320,13 @@ export default defineComponent({
       selfSnippetStore.onAddSnippetTag({ id: props.id, tagId });
     }, 300);
 
-    async function onRemoveTagOfSnippet(value) {
-      const id = String(value);
-      const tagId = String(route.params.id);
-      await selfSnippetStore.onDeleteSnippetTag({ id, tagId });
+    async function onRemoveTagOfSnippet(tagId) {
+      const response = await selfSnippetStore.onDeleteSnippetTag({
+        id: String(props.form.id),
+        tagId: String(tagId),
+      });
       nextTick();
+      return response;
     }
 
     return {

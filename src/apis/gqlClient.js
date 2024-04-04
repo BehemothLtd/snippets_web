@@ -77,7 +77,7 @@ api.interceptors.response.use(
           token.value = null;
           router.push("/signIn");
           break;
-      
+
         default:
           break;
       }

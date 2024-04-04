@@ -4,6 +4,7 @@ import combineQuery from "graphql-combine-query";
 import { CORE_SNIPPET_FIELDS } from "../fragment/snippet";
 import { METADATA_FIELDS } from "../fragment/shared";
 import { selfInfoGQL } from "@/apis/resolvers/auth";
+import { fetchAllTagsGQL } from "@/apis/resolvers/tags";
 
 export const getSnippetsListGQL = gql`
   ${CORE_SNIPPET_FIELDS}
@@ -54,6 +55,10 @@ export const getSnippetGQL = gql`
     }
   }
 `;
+
+export const requestSnippetEditGql = combineQuery("GetSnippetEditQuery")
+  .add(getSnippetGQL)
+  .add(fetchAllTagsGQL).document;
 
 export const requestHomePageGQL = combineQuery("HomePageQuery")
   .add(getSnippetsListGQL)

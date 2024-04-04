@@ -36,8 +36,8 @@ export default {
     return gqlRequest(addSnippetTagGQL, input, options);
   },
 
-  removeSnippetTag(input, options = { loading: false, toast: false }) {
-    return gqlRequest(deleteSnippetTagGQL, input, options);
+  removeSnippetTag(payload, options = { loading: false, toast: false }) {
+    return gqlRequest(deleteSnippetTagGQL, payload, options);
   },
 
   showMySnippets(input, options = { loading: true, toast: false }) {
