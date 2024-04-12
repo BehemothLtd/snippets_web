@@ -137,25 +137,6 @@ export default {
       return props.item.favorited ? "SvgLiked" : "SvgLike";
     });
 
-    // ==============METHODS==============
-    // function handleTags() {
-    //   const tags = tagsEl.value;
-    //   if (tags && tags.scrollHeight > tags.clientHeight) {
-    //     tags.classList.add("overflowed");
-    //   } else {
-    //     tags.classList.remove("overflowed");
-    //   }
-    // }
-
-    // onMounted(() => {
-    //   window.addEventListener("resize", handleTags);
-    //   handleTags();
-    // });
-
-    // onBeforeUnmount(() => {
-    //   window.removeEventListener("resize", handleTags);
-    // });
-
     return {
       tagsEl,
       svgLikeComponent,
