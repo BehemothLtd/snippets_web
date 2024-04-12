@@ -94,9 +94,7 @@ export default {
     const { modifyItemInList } = useCommon();
 
     onMounted(() => {
-      // if (authStore.token) {
-      //   fetchCollections();
-      // }
+      fetchCollections();
 
       if (route.query.slug) {
         homePageInput.value = {
@@ -172,22 +170,22 @@ export default {
       listType.value = type;
     }
 
-    function handleScroll(e) {
-      e.preventDefault();
-      let element = listWrapper.value;
+    // function handleScroll(e) {
+    //   e.preventDefault();
+    //   let element = listWrapper.value;
 
-      if (
-        element &&
-        element.getBoundingClientRect().bottom < window.innerHeight
-      ) {
-        if (currentPage.value < maxPage.value) {
-          snippetsStore.changePage(currentPage.value + 1);
-          fetchSnippets();
-        } else if (currentPage.value == maxPage.value) {
-          // TODO: toast latest
-        }
-      }
-    }
+    //   if (
+    //     element &&
+    //     element.getBoundingClientRect().bottom < window.innerHeight
+    //   ) {
+    //     if (currentPage.value < maxPage.value) {
+    //       snippetsStore.changePage(currentPage.value + 1);
+    //       fetchSnippets();
+    //     } else if (currentPage.value == maxPage.value) {
+    //       // TODO: toast latest
+    //     }
+    //   }
+    // }
 
     function closeModal() {
       snippetDetail.value = null;

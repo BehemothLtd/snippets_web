@@ -22,6 +22,7 @@
       </div>
     </div>
     -->
+
     <div class="snippet-container cursor-pointer">
       <div class="flex justify-between">
         <h2
@@ -68,11 +69,11 @@
     </div>
 
     <div class="flex justify-between items-center p-2">
-      <div v-if="type == 'masonry'" class="flex items-center">
+      <div class="flex items-center">
         <div>
           <SvgAvatar />
         </div>
-        <div class="ml-2 author-name">{{ item.author }}</div>
+        <div class="ml-2 author-name">{{ item.User.name }}</div>
       </div>
       <p class="flex justify-center items-center">
         <span class="mt-1 mr-1">{{ item.favoritesCount }}</span>
@@ -137,23 +138,23 @@ export default {
     });
 
     // ==============METHODS==============
-    function handleTags() {
-      const tags = tagsEl.value;
-      if (tags && tags.scrollHeight > tags.clientHeight) {
-        tags.classList.add("overflowed");
-      } else {
-        tags.classList.remove("overflowed");
-      }
-    }
+    // function handleTags() {
+    //   const tags = tagsEl.value;
+    //   if (tags && tags.scrollHeight > tags.clientHeight) {
+    //     tags.classList.add("overflowed");
+    //   } else {
+    //     tags.classList.remove("overflowed");
+    //   }
+    // }
 
-    onMounted(() => {
-      window.addEventListener("resize", handleTags);
-      handleTags();
-    });
+    // onMounted(() => {
+    //   window.addEventListener("resize", handleTags);
+    //   handleTags();
+    // });
 
-    onBeforeUnmount(() => {
-      window.removeEventListener("resize", handleTags);
-    });
+    // onBeforeUnmount(() => {
+    //   window.removeEventListener("resize", handleTags);
+    // });
 
     return {
       tagsEl,

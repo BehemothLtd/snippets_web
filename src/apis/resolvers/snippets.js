@@ -96,6 +96,13 @@ export const getMySnippetsGQL = gql`
         favoritesCount
         favorited
         pinned
+        tags {
+          id
+          name
+        }
+        User {
+          fullName
+        }
       }
       metadata {
         ...MetadataFragment

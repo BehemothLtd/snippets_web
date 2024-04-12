@@ -14,7 +14,6 @@
           class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         />
       </TransitionChild>
-
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div
           class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
@@ -34,7 +33,6 @@
               <div
                 ref="listWrapper"
                 class="overflow-y-scroll overflow-x-hidden max-h-[300px]"
-                @scroll="handleScroll"
               >
                 <p class="mb-2">Save snippet to...</p>
 
@@ -46,9 +44,9 @@
                         aria-describedby="comments-description"
                         name="comments"
                         type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         :checked="isAdded(item.snippets)"
                         @change="handleSnippet(item.id, $event.target.checked)"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                     </div>
                     <div class="ml-3 text-sm leading-6">
@@ -114,6 +112,7 @@ import { ref, onMounted, watch, computed } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCollectionsStore } from "@/stores/collections";
+import { useSnippetsStore } from "@/stores/snippets";
 
 const props = defineProps({
   open: {
@@ -130,7 +129,6 @@ const emits = defineEmits(["close"]);
 
 // ============REACTIVE=============
 const listWrapper = ref(null);
-const isCreateNew = ref(false);
 const title = ref("");
 
 // ============STORE=============
@@ -169,23 +167,6 @@ function handleSnippet(id, added) {
     collectionStore.collectionAddSnippet({ id, snippetId: props.snippetId });
   } else {
     collectionStore.collectionRemoveSnippet({ id, snippetId: props.snippetId });
-  }
-}
-
-function handleScroll(e) {
-  e.preventDefault();
-  let element = listWrapper.value;
-
-  const scrollPosition = element.scrollTop;
-  const scrollHeight = element.scrollHeight;
-  const clientHeight = element.clientHeight;
-
-  if (scrollPosition + clientHeight >= scrollHeight) {
-    if (query.value.page < maxPage.value) {
-      query.value.page += 1;
-
-      fetchCollections();
-    }
   }
 }
 </script>

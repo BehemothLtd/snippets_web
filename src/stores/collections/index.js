@@ -28,6 +28,8 @@ export const useCollectionsStore = defineStore("collections", () => {
 
     const result = await CollectionsRepository.list(query.value);
 
+    collections.value = result.Collections.collection;
+
     collections.value = [
       ...collections.value,
       ...result.Collections.collection,
@@ -41,7 +43,7 @@ export const useCollectionsStore = defineStore("collections", () => {
   async function getCollection(id) {
     const result = await CollectionsRepository.show(id);
 
-    collection.value = result.selfCollection;
+    collection.value = result.Collection;
   }
 
   async function createCollection(input) {
