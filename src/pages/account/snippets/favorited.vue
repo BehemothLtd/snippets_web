@@ -5,7 +5,6 @@
       src="@/assets/images/banner_profile_like.png"
       alt=""
     />
-
     <div
       v-if="favoritedSnippets"
       class="snippet-list grid gap-10 grid-cols-1 grid-rows-auto"
@@ -37,7 +36,7 @@
 
     <Pagination
       v-if="favoritedSnippetsMetadata.pages > 1"
-      class="my-3 ms-auto float-right"
+      class="my-3 ms-auto flex justify-center"
       :metadata="favoritedSnippetsMetadata"
       @change="onPageChange($event)"
     ></Pagination>
@@ -166,7 +165,6 @@ export default defineComponent({
       selectedSnippet,
       favoritedSnippets,
       favoritedSnippetsMetadata,
-      favoritedSnippets,
       showSnippet,
       onPageChange,
       likeSnippet,

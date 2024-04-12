@@ -3,9 +3,15 @@
     <router-link
       to="/snippets/new"
       type="button"
-      class="text-white !mb-5 !mx-auto bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      class="text-white !mb-5 !mx-auto bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left mr-2 mb-2"
     >
-      Create new Snippet +
+      <div class="flex gap-5 items-center">
+        <div class="font-semibold">
+          Create <br />
+          My Snippet
+        </div>
+        <SvgSubtract style="color: white" />
+      </div>
     </router-link>
   </li>
 
@@ -68,6 +74,7 @@ import SvgPinned from "@/components/svg/SvgPinned.vue";
 import SvgCollection from "@/components/svg/SvgCollection.vue";
 import SvgArrowDown from "@/components/svg/SvgArrowDown.vue";
 import SvgTag from "@/components/svg/SvgTag.vue";
+import SvgSubtract from "@/components/svg/SvgSubtract.vue";
 // import SvgSetting from "@/components/svg/SvgSetting.vue";
 
 // ==============STORE=============

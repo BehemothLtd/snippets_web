@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2">
+  <div class="py-4">
     <nav class="block">
       <ul class="flex pl-0 rounded list-none flex-wrap">
         <li v-for="(page, index) in metadata.pages" :key="index">
