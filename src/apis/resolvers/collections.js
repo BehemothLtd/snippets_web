@@ -12,6 +12,11 @@ export const getCollectionListGQL = gql`
         userId
         createdAt
         updatedAt
+        snippets {
+          id
+          content
+          title
+        }
       }
       metadata {
         ...MetadataFragment
@@ -25,10 +30,8 @@ export const getCollectionGQL = gql`
     Collection(id: $id) {
       id
       title
-      # count
       snippets {
         id
-        # author
         content
         title
         snippetType
