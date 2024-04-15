@@ -68,9 +68,9 @@ import { defineComponent, computed, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 // ==============COMPONENTS=============
-import SvgDashboard from "@/components/svg/SvgDashboard.vue";
-import SvgLike from "@/components/svg/SvgLike.vue";
-import SvgPinned from "@/components/svg/SvgPinned.vue";
+import SvgDashboardGradient from "@/components/svg/SvgDashboardGradient.vue";
+import SvgLikeGradient from "@/components/svg/SvgLikeGradient.vue";
+import SvgPinnedGradient from "@/components/svg/SvgPinnedGradient.vue";
 import SvgCollection from "@/components/svg/SvgCollection.vue";
 import SvgArrowDown from "@/components/svg/SvgArrowDown.vue";
 import SvgTag from "@/components/svg/SvgTag.vue";
@@ -84,10 +84,23 @@ import { storeToRefs } from "pinia";
 export default defineComponent({
   setup() {
     const menus = [
-      { icon: SvgDashboard, text: "My Page", url: "/account", current: true },
+      {
+        icon: SvgDashboardGradient,
+        text: "My Page",
+        url: "/account",
+        current: true,
+      },
       { icon: SvgTag, text: "Tags", url: "/account/tags" },
-      { icon: SvgLike, text: "Liked", url: "/account/snippets/favorited" },
-      { icon: SvgPinned, text: "Pinned", url: "/account/snippets/pinned" },
+      {
+        icon: SvgLikeGradient,
+        text: "Liked",
+        url: "/account/snippets/favorited",
+      },
+      {
+        icon: SvgPinnedGradient,
+        text: "Pinned",
+        url: "/account/snippets/pinned",
+      },
       // {icon: "Dashboard", text: "Setting", url: "/account/setting"},
     ];
 
