@@ -22,11 +22,7 @@
         class="h-[170px]"
       ></SnippetItem>
     </div>
-
-    <CommonModal
-      v-if="isShowDetailModal"
-      @closeModal="isShowDetailModal = false"
-    >
+    <CommonModal :open="isShowDetailModal" @close="isShowDetailModal = false">
       <SnippetsDetail
         :snippet.sync="selectedSnippet"
         @pinSnippet="pinSnippet"
@@ -137,7 +133,7 @@ export default defineComponent({
     }
 
     async function pinSnippet(id) {
-      const result = await snippetsStore.pin(String(id));
+      const result = await snippetStore.pin(String(id));
       const snippet = {
         id: String(id),
         pinned: result?.SnippetPin,
