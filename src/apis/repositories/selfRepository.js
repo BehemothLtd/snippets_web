@@ -6,7 +6,7 @@ import {
   decryptSnippetGQL,
   getMySnippetsGQL,
   getPinnedSnippetsGQL,
-  getFavoritedSnippetsGQL,
+  getFavouritedSnippetsGQL,
 } from "@/apis/resolvers/snippets";
 
 // Mutations
@@ -56,6 +56,6 @@ export default {
   },
 
   getFavoritedSnippets(input, options = { loading: true, toast: false }) {
-    return gqlRequest(getFavoritedSnippetsGQL, { input }, options);
+    return gqlRequest(getFavouritedSnippetsGQL, { input }, options);
   },
 };

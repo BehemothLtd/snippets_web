@@ -130,22 +130,27 @@ export const decryptSnippetGQL = gql`
   }
 `;
 
-export const getFavoritedSnippetsGQL = gql`
+export const getFavouritedSnippetsGQL = gql`
+  ${METADATA_FIELDS}
   query ($input: PagyInput!) {
-    selfFavoritedSnippets(input: $input) {
+    SelfFavoritedSnippets(input: $input) {
       collection {
         id
         title
+        content
+        userId
         slug
-        previewContent
-        pinned
         snippetType
-        tags {
-          id
-          name
-        }
+        favoritesCount
+        favorited
+        pinned
+        createdAt
+        updatedAt
+        lockVersion
       }
-      metadata
+      metadata {
+        ...MetadataFragment
+      }
     }
   }
 `;

@@ -96,9 +96,9 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
   async function getFavoritedSnippets() {
     const result = await SelfRepository.getFavoritedSnippets(query.value);
 
-    favoritedSnippets.value = result.selfFavoritedSnippets.collection;
+    favoritedSnippets.value = result.SelfFavoritedSnippets.collection;
 
-    favoritedSnippetsMetadata.value = result.selfFavoritedSnippets.metadata;
+    favoritedSnippetsMetadata.value = result.SelfFavoritedSnippets.metadata;
   }
 
   return {

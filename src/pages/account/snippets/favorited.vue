@@ -5,7 +5,6 @@
       src="@/assets/images/banner_profile_like.png"
       alt=""
     />
-
     <div
       v-if="favoritedSnippets"
       class="snippet-list grid gap-10 grid-cols-1 grid-rows-auto"
@@ -25,7 +24,8 @@
 
     <CommonModal
       v-if="isShowDetailModal"
-      @closeModal="isShowDetailModal = false"
+      :open="isShowDetailModal"
+      @close="isShowDetailModal = false"
     >
       <SnippetsDetail
         :snippet.sync="selectedSnippet"
@@ -37,7 +37,7 @@
 
     <Pagination
       v-if="favoritedSnippetsMetadata.pages > 1"
-      class="my-3 ms-auto float-right"
+      class="my-3 ms-auto flex justify-center"
       :metadata="favoritedSnippetsMetadata"
       @change="onPageChange($event)"
     ></Pagination>
@@ -46,7 +46,6 @@
 
 <script>
 import { defineComponent, computed, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import Toast from "@/ultilities/toast";
 import { useCommon } from "@/composable/common.js";
@@ -107,7 +106,8 @@ export default defineComponent({
         await snippetStore.getSnippetDetail(String(item.slug));
       } else {
         privateSnippetFlg.value = true;
-        await selfSnippetStore.getMySnippet(Number(item.id));
+        // ! getMySnippetGQL error
+        // await selfSnippetStore.getMySnippet(Number(item.id));
       }
       if (selectedSnippet.value) {
         isShowDetailModal.value = true;
@@ -118,9 +118,13 @@ export default defineComponent({
       selfSnippetStore.getFavoritedSnippets();
     }
 
-    function onPageChange(page) {
+    async function onPageChange(page) {
       selfSnippetStore.setQuery({ page });
-      fetchPinnedSnippets();
+      await fetchFavoritedSnippets();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
 
     async function likeSnippet(input) {
@@ -166,7 +170,6 @@ export default defineComponent({
       selectedSnippet,
       favoritedSnippets,
       favoritedSnippetsMetadata,
-      favoritedSnippets,
       showSnippet,
       onPageChange,
       likeSnippet,
