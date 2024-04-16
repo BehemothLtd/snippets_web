@@ -17,5 +17,6 @@ export const CORE_SNIPPET_FIELDS = gql`
     User {
       name
     }
+    pinned
   }
 `;

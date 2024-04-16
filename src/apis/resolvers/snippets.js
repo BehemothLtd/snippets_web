@@ -112,21 +112,23 @@ export const getMySnippetsGQL = gql`
 `;
 
 export const getPinnedSnippetsGQL = gql`
+  ${METADATA_FIELDS}
   query ($input: PagyInput!) {
-    selfPinnedSnippets(input: $input) {
+    SelfPinnedSnippets(input: $input) {
       collection {
         id
         title
+        content
+        userId
         slug
-        previewContent
-        pinned
         snippetType
-        tags {
-          id
-          name
-        }
+        favoritesCount
+        favorited
+        pinned
       }
-      metadata
+      metadata {
+        ...MetadataFragment
+      }
     }
   }
 `;

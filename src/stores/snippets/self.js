@@ -72,8 +72,6 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
     set(snippetDetail.value, "isDecrypted", true);
     set(snippetDetail.value, "content", result.SnippetDecryptContent);
 
-    console.log("dsa", snippetDetail.value);
-
     return snippetDetail.value;
   }
 
@@ -88,9 +86,9 @@ export const useSelfSnippetsStore = defineStore("selfSnippets", () => {
   async function getPinnedSnippets() {
     const result = await SelfRepository.getPinnedSnippets(query.value);
 
-    pinnedSnippets.value = result.selfPinnedSnippets.collection;
+    pinnedSnippets.value = result.SelfPinnedSnippets.collection;
 
-    pinnedSnippetsMetadata.value = result.selfPinnedSnippets.metadata;
+    pinnedSnippetsMetadata.value = result.SelfPinnedSnippets.metadata;
   }
 
   async function getFavoritedSnippets() {
