@@ -18,7 +18,6 @@
         class="h-[170px]"
       ></SnippetItem>
     </div>
-
     <CommonModal
       v-if="isShowDetailModal"
       :open="isShowDetailModal"
@@ -110,13 +109,16 @@ export default defineComponent({
     }
 
     async function updateSnippet(snippet, privateKey) {
-      if (snippet.snippetType == SnippetTypeOptions.PUBLIC) {
-        await selfSnippetStore.snippetPrivate({ id: snippet.id, privateKey });
-      } else {
-        await selfSnippetStore.snippetPublic({ id: snippet.id, privateKey });
-      }
-      selfSnippetStore.resetQuery();
-      fetchMySnippets();
+      // if (snippet.snippetType == SnippetTypeOptions.PUBLIC) {
+      //   await selfSnippetStore.snippetPrivate({ id: snippet.id, privateKey });
+      // } else {
+      //   await selfSnippetStore.snippetPublic({
+      //     id: snippet.id,
+      //     PassKey: privateKey,
+      //   });
+      // }
+      // selfSnippetStore.resetQuery();
+      // fetchMySnippets();
     }
 
     function onPageChange(page) {

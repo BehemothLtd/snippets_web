@@ -17,11 +17,13 @@ export const createCollectionGQL = gql`
 
 export const updateCollectionGQL = gql`
   mutation ($id: ID!, $input: CollectionInput!) {
-    collectionUpdate(id: $id, input: $input) {
+    CollectionUpdate(id: $id, input: $input) {
       collection {
         id
         title
-        count
+        userId
+        createdAt
+        updatedAt
         snippets {
           id
           title
@@ -33,9 +35,7 @@ export const updateCollectionGQL = gql`
 
 export const deleteCollectionGQL = gql`
   mutation ($id: ID!) {
-    collectionDelete(id: $id) {
-      message
-    }
+    CollectionDelete(id: $id)
   }
 `;
 
@@ -47,16 +47,6 @@ export const collectionAddSnippetGQL = gql`
 
 export const collectionRemoveSnippetGQL = gql`
   mutation ($id: ID!, $snippetId: ID!) {
-    CollectionRemoveSnippet(id: $id, snippetId: $snippetId) {
-      collection {
-        id
-        title
-        count
-        snippets {
-          id
-          title
-        }
-      }
-    }
+    CollectionRemoveSnippet(id: $id, snippetId: $snippetId)
   }
 `;
